@@ -25,9 +25,6 @@ public class DemoController {
 	
 	@GET
 	public List<DemoResource> getAllDemos() {
-		if (Math.random() > 0.5) {
-			throw new NotFoundException();
-		}
 		Demo demo1 = new Demo("1", "demo1");
 		Demo demo2 = new Demo("2", "demo2");
 		
@@ -52,6 +49,16 @@ public class DemoController {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public DemoResource updateDemo(@PathParam("id") String id, DemoResource demoResource) {
 		Demo demo = demoMapper.toDomain(id, demoResource);
+		return demoMapper.toResource(demo);
+	}
+	
+	@GET
+	@Path("{id}")
+	public DemoResource getDemo(@PathParam("id") String id) {
+		if(!Arrays.asList("1", "2").contains(id)) {
+			throw new NotFoundException();
+		}
+		Demo demo = new Demo(id, "demo" + id);
 		return demoMapper.toResource(demo);
 	}
 }
