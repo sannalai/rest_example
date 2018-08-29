@@ -26,6 +26,15 @@ public class TestClass {
 				.map(Double::intValue)
 				.collect(Collectors.toList());
 
+		
+		
+//		.forEach(System.out::println);
+		
+//		ints.stream().forEach(System.out::println);
+	}
+	
+	@Test
+	public void shouldCountAverageFromNestedLists() {
 		double avg = Arrays.asList(
 				Foo.builder().ints(Arrays.asList(1, 2)).build(),
 				Foo.builder().ints(Arrays.asList(3, 4)).build())
@@ -34,7 +43,10 @@ public class TestClass {
 		.flatMap(List::stream)
 		.collect(Collectors.averagingInt(i -> i));
 		System.out.println(avg);
-		
+	}
+	
+	@Test
+	public void shouldCountSumOfNestedLists() {
 		Optional<Integer> sum = Arrays.asList(
 				Foo.builder().ints(Arrays.asList(1, 2)).build(),
 				Foo.builder().ints(Arrays.asList(3, 4)).build())
@@ -42,27 +54,54 @@ public class TestClass {
 		.map(Foo::getInts)
 		.flatMap(List::stream)
 		.reduce(this::sum);
-		
-		System.out.println(sum.get());
-
-		long x = System.currentTimeMillis();
-		OptionalInt sum2 = 
-		IntStream.range(0, Integer.MAX_VALUE)
-			.parallel()
-			.reduce(this::sum);
-		System.out.println(System.currentTimeMillis() - x);
-		System.out.println(sum2.getAsInt());
-		
-//		.forEach(System.out::println);
-		
-//		ints.stream().forEach(System.out::println);
+		System.out.println(sum);
 	}
+	
+	@Test
+	public void shouldCountSumOfHUGEListOfIntegersWithAutoBoxing() {
+			long x = System.currentTimeMillis();
+			OptionalInt sum2 = 
+			IntStream.range(Integer.MIN_VALUE, Integer.MAX_VALUE)
+				.parallel()
+				.reduce(this::sum);
+			System.out.println(System.currentTimeMillis() - x);
+			System.out.println(sum2.getAsInt());
+	}
+	
+	@Test
+	public void shouldCountSumOfHUGEListOfIntegersWithoutAutoBoxing() {
+		System.out.println("Parallel stream without autoboxing:");
+		for (int i = 0;i < 20;i++) {
+			long x = System.currentTimeMillis();
+			OptionalInt sum2 = 
+			IntStream.range(Integer.MIN_VALUE, Integer.MAX_VALUE)
+				.parallel()
+				.reduce(TestClass::fastSum);
+			System.out.println(System.currentTimeMillis() - x);
+			System.out.println(sum2.getAsInt());
+		}
+	}
+	
+	@Test
+	public void shouldCountSumTraditionalWay() {
+		System.out.println("Traditional sum:");
+		for (int n = 0;n < 20;n++) {
+			long x = System.currentTimeMillis();
+			int sum2 = 0;
+			for (int i = Integer.MIN_VALUE;i < Integer.MAX_VALUE;i++) {
+				sum2 += i;
+			}
+			System.out.println(System.currentTimeMillis() - x);
+			System.out.println(sum2);
+		}
+	}
+	
 	
 	public Integer sum(Integer currentSum, Integer toAdd) {
 		return currentSum + toAdd;
 	}
 	
-	public int fastSum(int currentSum, int toAdd) {
+	public final static int fastSum(int currentSum, int toAdd) {
 		return currentSum + toAdd;
 	}
 	
