@@ -11,6 +11,11 @@ import javax.ws.rs.core.MediaType;
 import com.github.sannalai.jaxrs.example.hateoas.LinkBuilder;
 import com.github.sannalai.jaxrs.example.model.ServiceResource;
 
+/**
+ * ufdsiufdiufyiudfysdifuysdifuy
+ * @author sasa
+ *
+ */
 @Path("")
 @Produces(MediaType.APPLICATION_JSON)
 public class DemoApiController {

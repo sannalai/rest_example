@@ -9,6 +9,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import lombok.AllArgsConstructor;
@@ -58,6 +59,7 @@ public class TestClass {
 	}
 	
 	@Test
+	@Ignore
 	public void shouldCountSumOfHUGEListOfIntegersWithAutoBoxing() {
 			long x = System.currentTimeMillis();
 			OptionalInt sum2 = 
@@ -69,6 +71,7 @@ public class TestClass {
 	}
 	
 	@Test
+	@Ignore
 	public void shouldCountSumOfHUGEListOfIntegersWithoutAutoBoxing() {
 		System.out.println("Parallel stream without autoboxing:");
 		for (int i = 0;i < 20;i++) {
@@ -83,6 +86,7 @@ public class TestClass {
 	}
 	
 	@Test
+	@Ignore
 	public void shouldCountSumTraditionalWay() {
 		System.out.println("Traditional sum:");
 		for (int n = 0;n < 20;n++) {

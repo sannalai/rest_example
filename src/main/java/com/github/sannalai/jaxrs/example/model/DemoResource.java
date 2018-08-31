@@ -5,6 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Diipa daapa
+ * @author sasa
+ *
+ */
 @Getter
 @Setter
 @NoArgsConstructor
