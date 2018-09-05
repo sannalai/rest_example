@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<enunciate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:noNamespaceSchemaLocation="http://enunciate.webcohesion.com/schemas/enunciate-2.0.0-M.3.xsd">
-
-    <application root="/api" />
-
-</enunciate>

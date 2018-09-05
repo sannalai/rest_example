@@ -17,6 +17,10 @@ import javax.ws.rs.core.MediaType;
 import com.github.sannalai.jaxrs.example.mapping.DemoMapper;
 import com.github.sannalai.jaxrs.example.model.DemoResource;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@Api("This gives you demos")
 @Path("demos")
 @Produces(MediaType.APPLICATION_JSON)
 public class DemoController {
@@ -24,6 +28,7 @@ public class DemoController {
 	private DemoMapper demoMapper;
 	
 	@GET
+	@ApiOperation(value = "Get them all")
 	public List<DemoResource> getAllDemos() {
 		Demo demo1 = new Demo("1", "demo1");
 		Demo demo2 = new Demo("2", "demo2");

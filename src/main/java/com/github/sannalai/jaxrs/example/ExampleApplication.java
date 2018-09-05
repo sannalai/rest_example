@@ -11,6 +11,7 @@ import io.swagger.jaxrs.config.BeanConfig;
 public class ExampleApplication extends Application {
 	public ExampleApplication() {
         BeanConfig beanConfig = new BeanConfig();
+        beanConfig.setDescription("This is awesome API");
         beanConfig.setVersion("1.0");
         beanConfig.setSchemes(new String[]{"http"});
         beanConfig.setHost("localhost:8080");
